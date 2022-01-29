@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.21)
+project(server)
+
+set(CMAKE_CXX_STANDARD 17)
+find_package(Boost 1.71 REQUIRED system thread regex)
+if (NOT Boost_FOUND)
+    message(FATAL_ERROR "Boost not found! Aborting...")
+endif()
+message("Boost Found at ${Boost_INCLUDE_DIRS}")
+message("Boost link directory ${Boost_LIBRARY_DIRS}")
+
+include_directories(${Boost_INCLUDE_DIRS})
+link_directories(${Boost_LIBRARY_DIRS})
+add_executable(server main.cpp)
+target_link_libraries(server ${Boost_LIBRARIES} ${CMAKE_DL_LIBS})
